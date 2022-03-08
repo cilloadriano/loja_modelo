@@ -39,9 +39,8 @@ export class ClienteService {
 
     //Services CRUD
     create(cliente: Cliente): Observable<Cliente>{
-      const url = this.baseURL + "cliente"
+      const url = this.baseURL + "/cliente"
       return this.httpClient.post<Cliente>(url, cliente);
-  
     }
 
     delete(id: Number): Observable<void> {

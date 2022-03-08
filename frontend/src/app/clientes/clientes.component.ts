@@ -37,27 +37,30 @@ export class ClientesComponent implements OnInit {
   ngOnInit(): void {
    this.findById()
     
-   this.cliente.nomeCli = this.route.snapshot.paramMap.get('nomeCli')!
    this.findByName()
   }
 
   findById() : void {
-    this.clienteService.findById(this.cliente.id!).subscribe((resposta)=> {
-      this.cliente.nomeCli = resposta.nomeCli
-      this.cliente.endCli = resposta.endCli
-      this.cliente.limiteCred = resposta.limiteCred
-      this.cliente.limiteParc = resposta.limiteParc
-    })
+    if(this.cliente && this.cliente.id){
+      this.clienteService.findById(this.cliente.id!).subscribe((resposta)=> {
+        this.cliente.nomeCli = resposta.nomeCli
+        this.cliente.endCli = resposta.endCli
+        this.cliente.limiteCred = resposta.limiteCred
+        this.cliente.limiteParc = resposta.limiteParc
+      })
+    }
   }
 
   findByName() : void {
-    this.clienteService.findByName(this.cliente.nomeCli!).subscribe((resposta)=> {
-      this.cliente.nomeCli = resposta.nomeCli
-      this.cliente.endCli = resposta.endCli
-      this.cliente.limiteCred = resposta.limiteCred
-      this.cliente.limiteParc = resposta.limiteParc
-      console.log(this.cliente)
-    })
+    if(this.cliente && this.cliente.nomeCli){
+      this.clienteService.findByName(this.cliente.nomeCli!).subscribe((resposta)=> {
+        this.cliente.nomeCli = resposta.nomeCli
+        this.cliente.endCli = resposta.endCli
+        this.cliente.limiteCred = resposta.limiteCred
+        this.cliente.limiteParc = resposta.limiteParc
+        console.log(this.cliente)
+      })
+    }
   }
 
   private getClientes(){
@@ -68,7 +71,6 @@ export class ClientesComponent implements OnInit {
 
   delete(id: number){
     this.clienteService.delete(id).subscribe( data => {
-      console.log(data);
       this.getClientes();
     })
   }

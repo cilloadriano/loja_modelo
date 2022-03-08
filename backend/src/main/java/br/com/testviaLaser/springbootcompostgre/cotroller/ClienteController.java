@@ -46,7 +46,8 @@ public class ClienteController {
         return ClienteRs.converter(cliente);
     }
 
-    @PostMapping("/")
+    @PostMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public void savePerson(@RequestBody ClienteRq cliente) {
         var c = new Cliente();
         c.setNomeCli(cliente.getNomeCli());
@@ -67,6 +68,17 @@ public class ClienteController {
             clienteSave.setLimiteCred(cliente.getLimiteCred());
             clienteSave.setLimiteParc(cliente.getLimiteParc());
             clienteRepository.save(clienteSave);
+        } else {
+            throw new Exception("Pessoa Não encontrada");
+        }
+    }
+    
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable("id") Long id) throws Exception {
+        var c = clienteRepository.findById(id);
+
+        if (c.isPresent()) {
+            clienteRepository.delete(c.get());
         } else {
             throw new Exception("Pessoa Não encontrada");
         }

@@ -19,14 +19,14 @@
                    </tr>
                </thead>
                <tbody>  
-                <tr *ngFor = "let c of clientes" [routerLink]= "['/clientes',c.id]">
+                <tr *ngFor = "let c of clientes">
                     <td>{{c.nomeCli}}</td>
                     <td>{{c.endCli}}</td>
                     <td>{{c.limiteCred}}</td>
                     <td>{{c.limiteParc}}</td>
-                         <td>td>
-                            <button (click)="delete(cliente.id)" type="button" class="btn btn-danger">Deletar</button>
-                            <button (click)="update(cliente.id)" type="button" class="btn btn-warning">Update</button>
+                         <td>
+                            <button (click)="delete(c.id)" type="button" class="btn btn-danger">Deletar</button>
+                            <button (click)="update(c.id)" type="button" class="btn btn-warning">Update</button>
                          </td>
                        </tr>
                </tbody>

@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @author amc-desenv
  */
 @Entity
-@Table(name="cliente")
+@Table(name="cliente", schema = "teste")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
