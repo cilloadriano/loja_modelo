@@ -1,0 +1,89 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package br.com.testviaLaser.springbootcompostgre.cotroller;
+
+import br.com.testviaLaser.springbootcompostgre.cotroller.dto.ClienteRq;
+import br.com.testviaLaser.springbootcompostgre.cotroller.dto.ClienteRs;
+import br.com.testviaLaser.springbootcompostgre.model.Cliente;
+import br.com.testviaLaser.springbootcompostgre.repository.ClienteCustomRepository;
+import br.com.testviaLaser.springbootcompostgre.repository.ClienteRepository;
+
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ *
+ * @author amc-desenv
+ */
+@RestController
+@RequestMapping("/cliente")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class ClienteController {
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+    
+    @Autowired
+    private ClienteCustomRepository clienteCustomRepository;
+
+    @GetMapping
+    @CrossOrigin(origins = "*")
+    public List<ClienteRs> findAll() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        return clientes
+                .stream()
+                .map(ClienteRs::converter)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public ClienteRs findById(@PathVariable("id") Long id) {
+        var cliente = clienteRepository.getById(id);
+        return ClienteRs.converter(cliente);
+    }
+
+    @PostMapping("/")
+    public void savePerson(@RequestBody ClienteRq cliente) {
+        var c = new Cliente();
+        c.setNomeCli(cliente.getNomeCli());
+        c.setEndCli(cliente.getEndCli());
+        c.setLimiteCred(cliente.getLimiteCred());
+        c.setLimiteParc(cliente.getLimiteParc());
+        clienteRepository.save(c);
+    }
+
+    @PutMapping("/{id}")
+    public void updatePerson(@PathVariable("id") Long id, @RequestBody ClienteRq cliente) throws Exception {
+        var c = clienteRepository.findById(id);
+
+        if (c.isPresent()) {
+            var clienteSave = c.get();
+            clienteSave.setNomeCli(cliente.getNomeCli());
+            clienteSave.setEndCli(cliente.getEndCli());
+            clienteSave.setLimiteCred(cliente.getLimiteCred());
+            clienteSave.setLimiteParc(cliente.getLimiteParc());
+            clienteRepository.save(clienteSave);
+        } else {
+            throw new Exception("Pessoa Não encontrada");
+        }
+    }
+
+    @GetMapping("/filter/custom")
+    public List<ClienteRs> findPersonByCustom(
+            @RequestParam(value = "id", required = false) Long id,
+            @RequestParam(value = "nomeCli", required = false) String nomeCli,
+            @RequestParam(value = "endCli", required = false) String endCli,
+            @RequestParam(value = "limiteCred", required = false) Float limiteCred,
+            @RequestParam(value = "limiteParc", required = false) Float limiteParc
+    ) {
+        return this.clienteCustomRepository.find(id, nomeCli, endCli, limiteCred, limiteParc)
+                .stream()
+                .map(ClienteRs::converter)
+                .collect(Collectors.toList());
+    }
+
+}
