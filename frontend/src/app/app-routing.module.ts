@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "home", component: HomeComponent },
   { path: "clientes", component: ClientesComponent },
-  { path: "clientes/:id", component: ClientesDetalheComponent },
+  { path: "clientedetalhes/:id", component: ClientesDetalheComponent },
   { path: "clientedetalhes", component: ClientesDetalheComponent },
   { path: "produtos", component: ProdutosComponent },
-  { path: "produtosdetalhes", component: ProdutosDetalhesComponent },
-  { path : "produtos/:id", component: ProdutosDetalhesComponent }
+  { path: "produtodetalhes", component: ProdutosDetalhesComponent },
+  { path : "produtodetalhes/:id", component: ProdutosDetalhesComponent }
   
 ];
 

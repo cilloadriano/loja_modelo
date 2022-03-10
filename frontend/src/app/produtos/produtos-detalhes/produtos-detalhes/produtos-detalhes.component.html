@@ -1,50 +1,37 @@
 <app-home></app-home>
 <div class="fCadastro">
-    <h3> Cadastro Produtos</h3>
-    <div class="conteudoCadastro">
-        <form class="conteudoform"  [formGroup]="produtoForm">
-            <div>
-                <div>
-                    <input type="text" class="produto" placeholder="Nome do Produto" formControlName="nomeProd" />
-                </div>
-                
-                
-                <small 
-                    *ngIf="produtoForm.get('nomeProd')?.errors?.['required'] && produtoForm.get('nomeProd')?.touched"
-                    class="text-danger d-block mt-2">
-                    Campo Obrigatório!
-                </small>
-                
-            </div>
-            <div>
-                <div>
-                    <input class="produto" placeholder="Descriçao Produto" formControlName="descProd" />
-                </div>
-                
-                <small 
-                    *ngIf="produtoForm.get('descProd')?.errors?.['required'] && produtoForm.get('descProd')?.touched"
-                    class="text-danger d-block mt-2">
-                    Campo Obrigatório!
-                </small>
-                
-            </div>
-            <div>
-                <div>
-                    <input class="produto" placeholder="Valor Produto" formControlName="valorProd" />
-                </div>
-                
-                <small 
-                    *ngIf="produtoForm.get('valorProd')?.errors?.['required'] && produtoForm.get('valorProd')?.touched"
-                    class="text-danger d-block mt-2">
-                    Campo Obrigatório!
-                </small>
-                
-            </div>
+  <h3>Cadastro Produtos</h3>
+  <div class="conteudoCadastro">
+    <form class="conteudoform" [formGroup]="formgroup">
+      <div>
+        <div>
+          <input type="text" class="produto" placeholder="Nome Produto" formControlName="nomeproduto"
+            [(ngModel)]="produto.nomeProd" required />
+        </div>
 
-            <div>
-                <button type="submit" (click)="create()" class="btn btn-success">Salvar</button>
-                <button type="button" class="btn btn-secondary" routerLink="/produtos">Voltar </button>
-            </div>
-        </form>
-    </div>
+
+      </div>
+      <div>
+        <div>
+          <input type="text" class="produto" placeholder="Descrição Produto" formControlName="descproduto"
+            [(ngModel)]="produto.descProd" requerid />
+        </div>
+
+      </div>
+      <div>
+        <div>
+          <input type="text" class="produto" placeholder="Valor Produto" formControlName="valorproduto"
+            [(ngModel)]="produto.valorProd" requerid />
+        </div>
+
+        <small class="text-danger d-block mt-2">
+          Campos Obrigatórios!
+        </small>
+      </div>
+      <div>
+        <button (click)="create()" class="btn btn-success" [disabled]="!formgroup.valid">Salvar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/produtos">Voltar</button>
+      </div>
+    </form>
+  </div>
 </div>

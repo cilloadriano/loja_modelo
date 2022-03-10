@@ -1,63 +1,49 @@
 <app-home></app-home>
 <div class="fCadastro">
-  <h3>Salvar Clientes</h3>
+  <h3>Cadastro Clientes</h3>
   <div class="conteudoCadastro">
-    <div>
+    <form class="conteudoform" [formGroup]="formgroup">
       <div>
-        <input
-          type="text"
-          class="cliente"
-          placeholder="Nome do Cliente"
-          [(ngModel)]="cliente.nomeCli"
-        />
+        <div>
+          <input type="text" class="cliente" placeholder="Nome do Cliente" formControlName="nomecliente"
+            [(ngModel)]="cliente.nomeCli" required />
+        </div>
+
+
+      </div>
+      <div>
+        <div>
+          <input type="text" class="cliente" placeholder="Endereço" formControlName="enderecocliente"
+            [(ngModel)]="cliente.endCli" requerid />
+        </div>
+
+
+      </div>
+      <div>
+        <div>
+          <input type="text" class="cliente" placeholder="Limite de Crédito" formControlName="limiteCredito"
+            [(ngModel)]="cliente.limiteCred" required />
+        </div>
+
+
+      </div>
+      <div>
+        <div>
+          <input type="text" class="cliente" placeholder="Limite da Parcela" formControlName="limiteParcela"
+            [(ngModel)]="cliente.limiteParc" required />
+        </div>
+
+        <small class="text-danger d-block mt-2">
+          * Campos Obrigatório!
+        </small>
       </div>
 
-      <small class="text-danger d-block mt-2">
-        Campo Obrigatório!
-      </small>
-    </div>
-    <div>
       <div>
-        <input
-          class="cliente"
-          placeholder="Endereço"
-          [(ngModel)]="cliente.endCli"/>
+        <button (click)="create()" class="btn btn-success" [disabled]="!formgroup.valid">Salvar</button>
+        <button class="btn btn-secondary" routerLink="/clientes">
+          Voltar
+        </button>
       </div>
-
-      <small class="text-danger d-block mt-2">
-        Campo Obrigatório!
-      </small>
-    </div>
-    <div>
-      <div>
-        <input 
-            class="cliente" 
-            [(ngModel)]="cliente.limiteCred"
-            placeholder="Limite de Crédito"/>
-      </div>
-
-      <small class="text-danger d-block mt-2">
-        Campo Obrigatório!
-      </small>
-    </div>
-    <div>
-      <div>
-        <input 
-            [(ngModel)]="cliente.limiteParc"
-            class="cliente" 
-            placeholder="Limite da Parcela"/>
-      </div>
-
-      <small class="text-danger d-block mt-2">
-        Campo Obrigatório!
-      </small>
-    </div>
-
-    <div>
-      <button (click)="create()" class="btn btn-success">Salvar</button>
-      <button type="button" class="btn btn-secondary" routerLink="/clientes">
-        Voltar
-      </button>
-    </div>
+    </form>
   </div>
 </div>

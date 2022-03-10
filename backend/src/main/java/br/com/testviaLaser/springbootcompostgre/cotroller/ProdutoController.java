@@ -26,7 +26,7 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
-    
+
     @Autowired
     private ProdutoCustomRepository produtoCustomRepository;
 
@@ -40,13 +40,24 @@ public class ProdutoController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/name/{nome}")
+    @CrossOrigin(origins = "*")
+    public List<ProdutoRs> findByName(@PathVariable String nome) {
+        List<Produto> produto = produtoRepository.findByNomeProdStartingWith(nome);
+        return produto
+                .stream()
+                .map(ProdutoRs::converter)
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/{id}")
     public ProdutoRs findById(@PathVariable("id") Long id) {
         var produto = produtoRepository.getById(id);
         return ProdutoRs.converter(produto);
     }
 
-    @PostMapping("/")
+    @PostMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public void savePerson(@RequestBody ProdutoRq produto) {
         var p = new Produto();
         p.setNomeProd(produto.getNomeProd());
@@ -70,13 +81,23 @@ public class ProdutoController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable("id") Long id) throws Exception {
+        var c = produtoRepository.findById(id);
+
+        if (c.isPresent()) {
+            produtoRepository.delete(c.get());
+        } else {
+            throw new Exception("Produto Não encontrada");
+        }
+    }
+
     @GetMapping("/filter/custom")
     public List<ProdutoRs> findPersonByCustom(
             @RequestParam(value = "id", required = false) Long id,
             @RequestParam(value = "nomeProd", required = false) String nomeProd,
             @RequestParam(value = "descProd", required = false) String descProd,
-            @RequestParam(value = "valorProd", required = false) Float valorProd
-    ) {
+            @RequestParam(value = "valorProd", required = false) Float valorProd) {
         return this.produtoCustomRepository.find(id, nomeProd, descProd, valorProd)
                 .stream()
                 .map(ProdutoRs::converter)

@@ -26,7 +26,7 @@ public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
-    
+
     @Autowired
     private ClienteCustomRepository clienteCustomRepository;
 
@@ -34,6 +34,16 @@ public class ClienteController {
     @CrossOrigin(origins = "*")
     public List<ClienteRs> findAll() {
         List<Cliente> clientes = clienteRepository.findAll();
+        return clientes
+                .stream()
+                .map(ClienteRs::converter)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/name/{nome}")
+    @CrossOrigin(origins = "*")
+    public List<ClienteRs> findByName(@PathVariable String nome) {
+        List<Cliente> clientes = clienteRepository.findByNomeCliStartingWith(nome);
         return clientes
                 .stream()
                 .map(ClienteRs::converter)
@@ -72,7 +82,7 @@ public class ClienteController {
             throw new Exception("Pessoa Não encontrada");
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable("id") Long id) throws Exception {
         var c = clienteRepository.findById(id);
@@ -90,8 +100,7 @@ public class ClienteController {
             @RequestParam(value = "nomeCli", required = false) String nomeCli,
             @RequestParam(value = "endCli", required = false) String endCli,
             @RequestParam(value = "limiteCred", required = false) Float limiteCred,
-            @RequestParam(value = "limiteParc", required = false) Float limiteParc
-    ) {
+            @RequestParam(value = "limiteParc", required = false) Float limiteParc) {
         return this.clienteCustomRepository.find(id, nomeCli, endCli, limiteCred, limiteParc)
                 .stream()
                 .map(ClienteRs::converter)

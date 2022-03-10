@@ -8,15 +8,14 @@
     <form class="conteudoform" [formGroup]="loginForm" (submit)="submitLogin()">
 
         <div class="logo">
-            <img src="assets/indice.jpeg" class="imagelogo"/>
+            <img src="assets/indice.jpeg" class="imagelogo" />
         </div>
 
         <div>
             <div>
                 <input class="input-login" placeholder="email" formControlName="email" />
             </div>
-            <small 
-                *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
+            <small *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
                 class="text-danger d-block mt-2">
                 Campo Obrigatório!
             </small>
@@ -26,8 +25,7 @@
             <div>
                 <input class="input-login" type="password" placeholder="senha" formControlName="senha" />
             </div>
-            <small 
-                *ngIf="loginForm.get('senha')?.errors?.['required'] && loginForm.get('senha')?.touched"
+            <small *ngIf="loginForm.get('senha')?.errors?.['required'] && loginForm.get('senha')?.touched"
                 class="text-danger d-block mt-2">
                 Campo Obrigatório!
             </small>
@@ -41,5 +39,3 @@
 
 </div>
 <router-outlet></router-outlet>
-       
-      

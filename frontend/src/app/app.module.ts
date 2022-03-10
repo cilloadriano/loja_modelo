@@ -14,8 +14,7 @@ import { ClientesComponent } from 'src/app/clientes/clientes.component'
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ClientesDetalheComponent } from './clientes/cliente-detalhe/cliente-detalhe.component';
 import { ProdutosDetalhesComponent } from './produtos/produtos-detalhes/produtos-detalhes/produtos-detalhes.component';
-import { MenuDefinitionComponent } from './nav/nav.component';
-import { NavProdutoComponent } from './nav/nav-produto/nav-produto.component';
+
 import { HomeComponent } from './home/home.component'
 import { ClienteService } from './service/clienteservice';
 
@@ -43,8 +42,6 @@ const clienteRoutes: Routes =[
     ProdutosDetalhesComponent,
     ClientesComponent,
     ClientesDetalheComponent,
-    MenuDefinitionComponent,
-    NavProdutoComponent,
     HomeComponent   
   ],
   imports: [

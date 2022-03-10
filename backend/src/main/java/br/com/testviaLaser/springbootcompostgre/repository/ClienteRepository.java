@@ -5,9 +5,12 @@
 package br.com.testviaLaser.springbootcompostgre.repository;
 
 
-import br.com.testviaLaser.springbootcompostgre.model.Cliente;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import br.com.testviaLaser.springbootcompostgre.model.Cliente;
 
 /**
  *
@@ -16,5 +19,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    
+ List<Cliente> findByNomeCliStartingWith(String nome);  
 }

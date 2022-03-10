@@ -11,14 +11,13 @@ import br.com.testviaLaser.springbootcompostgre.model.Cliente;
  * @author amc-desenv
  */
 public class ClienteRs {
-    
+
     private Long id;
     private String nomeCli;
     private String endCli;
     private float limiteCred;
     private float limiteParc;
-    
-    
+
     public static ClienteRs converter(Cliente c) {
         var cliente = new ClienteRs();
         cliente.setId(c.getId());
@@ -28,9 +27,8 @@ public class ClienteRs {
         cliente.setLimiteParc(c.getLimiteParc());
         return cliente;
     }
-    
-    
-     public Long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -45,7 +43,7 @@ public class ClienteRs {
     public void setNomeCli(String nomeCli) {
         this.nomeCli = nomeCli;
     }
-    
+
     public String getEndCli() {
         return endCli;
     }
@@ -53,23 +51,21 @@ public class ClienteRs {
     public void setEndCli(String endCli) {
         this.endCli = endCli;
     }
-    
+
     public float getLimiteCred() {
         return limiteCred;
     }
 
-    public void setLimiteCred(float limiteCred ) {
+    public void setLimiteCred(float limiteCred) {
         this.limiteCred = limiteCred;
     }
-    
+
     public float getLimiteParc() {
         return limiteParc;
     }
 
-    public void setLimiteParc(float limiteParc ) {
+    public void setLimiteParc(float limiteParc) {
         this.limiteParc = limiteParc;
     }
-    
-    
-}
 
+}

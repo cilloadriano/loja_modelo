@@ -11,13 +11,12 @@ import br.com.testviaLaser.springbootcompostgre.model.Produto;
  * @author amc-desenv
  */
 public class ProdutoRs {
-    
+
     private Long id;
     private String nomeProd;
     private String descProd;
     private float valorProd;
-    
-    
+
     public static ProdutoRs converter(Produto p) {
         var produto = new ProdutoRs();
         produto.setId(p.getId());
@@ -26,8 +25,7 @@ public class ProdutoRs {
         produto.setValorProd(p.getValorProd());
         return produto;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -43,7 +41,7 @@ public class ProdutoRs {
     public void setNomeProd(String nomeProd) {
         this.nomeProd = nomeProd;
     }
-    
+
     public String getDescProd() {
         return descProd;
     }
@@ -51,13 +49,13 @@ public class ProdutoRs {
     public void setDescProd(String descProd) {
         this.descProd = descProd;
     }
-    
+
     public float getValorProd() {
         return valorProd;
     }
 
-    public void setValorProd(float valorProd ) {
+    public void setValorProd(float valorProd) {
         this.valorProd = valorProd;
     }
-    
+
 }
